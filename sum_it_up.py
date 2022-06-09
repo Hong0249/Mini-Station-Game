@@ -4,17 +4,6 @@ import turtle
 import result
 import os
 
-##class team():       # Create a class for teams
-##    def __init__(self, team_name, names, score = 0):
-##        self.team_name = team_name
-##        self.players = list(names)
-##        self.score = score
-##
-##f_team = list()
-##f_team.append(team("Team A", ["Player A", "Player B", "Player C", "Player D"],3))
-##f_team.append(team("Team B", ["Player E", "Player F", "Player G", "Player H"],4))
-
-
 
 ##create a new class called displayResult
 class displayResult:
@@ -110,7 +99,7 @@ class displayResult:
                 turtle.forward(100)
 
 ##declare a function for the game section 'Sum It Up'
-def SUM_IT_UP(f_team):
+def start(f_team):
     os.system('cls')
     rng = random.Random()                    #make a random number generator
     SUM = []
@@ -174,10 +163,7 @@ def SUM_IT_UP(f_team):
     wn.exitonclick()                            #wait for user to close the window
     next_game(f_team)
 
-def next_game(f_team):
+def next_game(f_team): #method to next module
     os.system('cls')
     result.sorting_result(f_team)
 
-
-##call the function
-##SUM_IT_UP(f_team)
