@@ -1,4 +1,4 @@
-class team():       # A class for teams
+class team():       # Create a new class called team
     def __init__(self, team_name, names, score = 0):
         self.team_name = team_name
         self.players = list(names)
@@ -18,7 +18,7 @@ def process_namelist():  # Method to process the namelist.txt file
     return(display_teamlist(teamlist))
 
 def display_teamlist(teamlist): # Method to display the teamlist
-    for i in range(len(teamlist[0])):   # Loop through the teamlist to print the list of teams in a table
+    for i in range(len(teamlist[0])):   # Loop through teamlist to print each team in a table
         if len(teamlist) == 1:
             layout = "{0:<20}"
             print(layout.format(teamlist[0][i], end="\n\n"))

@@ -1,7 +1,10 @@
-import SUM_IT_UP
+##import modules
+import random
+import sum_it_up
 import os
 
-HANGMAN = (
+
+HANGMAN = ( #Tuple for the hangman graphics
 """
   Chance:6
   ----
@@ -81,24 +84,23 @@ HANGMAN = (
 """
 )
 
-def start(f_team):
+def start(f_team): # Method to start the game
   os.system('cls')
-  fin = open("hangman_word_list.txt","r")                       #read file
+  fin = open("hangman_word_list.txt","r")
   myfile = fin.readlines()
   fin.close()
-  word_list = list()                                            #list
-  for word in myfile:
+  word_list = list()
+  for word in myfile: # Create a list of words read from the file
       word_list.append(word.strip())
 
-  import random                                                 #modules
   rng = random.Random()
   word_random = rng.sample(word_list,2)
 
   print("Welcome to HANGMAN competition!!!")
-  for team in f_team:
+  for team in f_team: # 
     print(team.team_name, "\nGet ready!!!")
     team.score = 0
-    for i in range(2):                                            #for loop
+    for i in range(2): # Play for 2 turns
         word_random = rng.choice(word_list)
         maximum_false = len(HANGMAN)
         until_now = "-" * len(word_random)
@@ -106,12 +108,12 @@ def start(f_team):
         used = []
         print("1,2,3,go!!!")
 
-        while false < maximum_false and until_now != word_random: #while loop
+        while false < maximum_false and until_now != word_random: # While the word is not guessed
 
             guess = input("Enter your guess: ")
             used.append(guess)
 
-            if guess in word_random:                               #if else
+            if guess in word_random:                               # If the guess is in the word
                 new_word = ""
                 for i in range(len(word_random)):
                     if guess == word_random[i]:
@@ -120,7 +122,7 @@ def start(f_team):
                         new_word += until_now[i]
                 until_now = new_word
 
-            else:
+            else:                                                # If the guess is not in the word
                 print("your guess, ",guess ,"is wrong (0_0!)")
                 print(HANGMAN[false])
                 false+=1
@@ -128,20 +130,20 @@ def start(f_team):
             print ("You've used the following letters: \n", used)
             print ("The word so far guessed is : ", until_now)
 
-        if false == maximum_false:
+        if false == maximum_false: # If all the chances are used
             print("No chance left! 😥")
             print("The word is",word_random)
             team.score+=0
             print("Score :",team.score)
 
-        else:
+        else: # If the word is guessed
             print("Success! 😎")
-            print("Correct! It is ", word_random)
+            print("The word you guessed is ", word_random)
             team.score+=5
             print("Score :",team.score)
   input("Next game? (Press ENTER)")
   next_game(f_team)
 
-def next_game(f_team):
-  SUM_IT_UP.SUM_IT_UP(f_team)
+def next_game(f_team): # Method to next module
+  sum_it_up.start(f_team)
 
