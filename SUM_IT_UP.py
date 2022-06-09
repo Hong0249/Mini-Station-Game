@@ -2,6 +2,19 @@
 import random
 import turtle
 import result
+import os
+
+##class team():       # Create a class for teams
+##    def __init__(self, team_name, names, score = 0):
+##        self.team_name = team_name
+##        self.players = list(names)
+##        self.score = score
+##
+##f_team = list()
+##f_team.append(team("Team A", ["Player A", "Player B", "Player C", "Player D"],3))
+##f_team.append(team("Team B", ["Player E", "Player F", "Player G", "Player H"],4))
+
+
 
 ##create a new class called displayResult
 class displayResult:
@@ -98,25 +111,28 @@ class displayResult:
 
 ##declare a function for the game section 'Sum It Up'
 def SUM_IT_UP(f_team):
-
+    os.system('cls')
     rng = random.Random()                    #make a random number generator
     SUM = []
-    num_record = [[0,0],[0,0]]
+    num_record = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
 
-    for turn in range(2):                    #play for 4 turns
-        for team in range(2):
-            print("Team {0} Round {1} !".format(team+1, turn+1))
+    for turn in range(4):                    #play for 4 turns
+        i = 0
+        for team in f_team:
+            print("{0} Round {1} !".format(team.team_name, turn+1))
             start = input("Press 'Enter' to throw the dice")
             dice_throw = rng.randrange(1,7)  #return a random number in range 1-6
             ##print out the number of each turn
-            print("The number of team {0} for round {1} is {2}".format(team+1, turn+1, dice_throw))
-            num_record[team][turn] = dice_throw
+            print("The number of {0} for round {1} is {2}".format(team.team_name, turn+1, dice_throw))
+
+            num_record[i][turn] = dice_throw
+            i+=1
         print("*********************************************")
-
-    for i in range(2):
+    print(num_record)
+    i = 0
+    for team in f_team:
         SUM.append(sum(num_record[i]))       #sum up the total for each team
-        print("Sum of number for team", i+1, "=", SUM[i])
-
+        print("Sum of number for team", team.team_name, "=", SUM[i])
         wn = turtle.Screen()                 #create a playground for turtles
         wn.bgcolor("black")                  #set the window background color to black
         wn.title("THE RESULT SESSION")       #set the window title
@@ -149,17 +165,19 @@ def SUM_IT_UP(f_team):
             res2 = displayResult(SUM[i]-20)
             res2.displayTurtle(dig2)
         wn.clear()
+        i+=1
 
     for i in f_team:
         i.score += SUM[f_team.index(i)]
         print(i.team_name, "score:", i.score)
-
-    wn.mainloop()                            #wait for user to close the window
+    print("You have to close the windows yourself to continue... 🙂")
+    wn.exitonclick()                            #wait for user to close the window
     next_game(f_team)
 
 def next_game(f_team):
-  result.sorting_result(f_team)
+    os.system('cls')
+    result.sorting_result(f_team)
 
 
 ##call the function
-#SUM_IT_UP()
+##SUM_IT_UP(f_team)

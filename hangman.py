@@ -1,4 +1,5 @@
 import SUM_IT_UP
+import os
 
 HANGMAN = (
 """
@@ -81,6 +82,7 @@ HANGMAN = (
 )
 
 def start(f_team):
+  os.system('cls')
   fin = open("hangman_word_list.txt","r")                       #read file
   myfile = fin.readlines()
   fin.close()
@@ -94,7 +96,7 @@ def start(f_team):
 
   print("Welcome to HANGMAN competition!!!")
   for team in f_team:
-    print("Team:",team.team_name,'\n')
+    print(team.team_name, "\nGet ready!!!")
     team.score = 0
     for i in range(2):                                            #for loop
         word_random = rng.choice(word_list)
@@ -127,19 +129,17 @@ def start(f_team):
             print ("The word so far guessed is : ", until_now)
 
         if false == maximum_false:
-            print("No chance(0.0)")
-            print("          ' '  ")
-            print("          ' '  ")
-            print("          sad  ")
-            print("The word you guess is ",word_random)
+            print("No chance left! 😥")
+            print("The word is",word_random)
             team.score+=0
-            print(team.team_name,":",team.score)
+            print("Score :",team.score)
 
         else:
-            print("success")
-            print(word_random)
-            team.score+=1
-            print(team.team_name,":",team.score)
+            print("Success! 😎")
+            print("Correct! It is ", word_random)
+            team.score+=5
+            print("Score :",team.score)
+  input("Next game? (Press ENTER)")
   next_game(f_team)
 
 def next_game(f_team):

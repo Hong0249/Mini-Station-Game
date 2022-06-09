@@ -2,26 +2,30 @@ import hangman, register
 import os
 f_team = []
 
-def main():
-    print("Welcome to the game!")
-    print("Type 'H' for help")
-    print("Type 'R' before start the game")
-    print("##Please create team's name and players' name in namelist.txt before start the game")
+def main():     # Main Menu
+
+    print("Welcome to the game! ")
 
 
-    prompt = input()
-    while(prompt != "Q"):
+    prompt = ''
+    while(prompt != "Q" and prompt !='q'):
+        print("Type 'H' for help")
+        print("Type 'R' to register team & players")
+        print("Type 'Q' to quit")
+        print()
         prompt = input("Please enter your command: ")
-        if prompt == "H":
-            os.system("help.txt")
-        elif prompt == "DONE":
+        if prompt == "GO":
             hangman.start(f_team)
-        elif prompt == "R":
-            print("Save the txt file and close it (●'◡'●)")
+        elif prompt == "H":
+            os.system("help.txt")
+        elif prompt == "R" or prompt == "r":
+            print("Save the namelist.txt file and close it (●'◡'●)")
             os.system("namelist.txt")
-            prompt = input("Press ENTER after finish player registration: ")
+            prompt = input("Press 'ENTER' after finish player registration: ")
             f_team = register.process_namelist()
-
+            print("Type 'GO' to start the game")
+    print("Thanks for playing, See yall")
     exit()
+
 
 main()
